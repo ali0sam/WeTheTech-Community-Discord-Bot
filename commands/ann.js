@@ -7,10 +7,7 @@ module.exports = {
     data : new SlashCommandBuilder()
         .setName("ann")
         .setDescription("Announce any texts")
-        .addStringOption(option =>
-            option.setName('input')
-                .setDescription('The input to announce')
-                .setRequired(true)),
+        .addStringOption(option => option.setName('input').setDescription('The input to announce').setRequired(true)),
 
     async execute(client, interaction){
 
