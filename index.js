@@ -1,6 +1,5 @@
 // Require needed packages
 const Discord = require("discord.js");
-const { resolveNaptr } = require("dns");
 const fs = require("fs");
 const config = require("./config.json");
 
