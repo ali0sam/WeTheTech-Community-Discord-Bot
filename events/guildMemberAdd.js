@@ -25,5 +25,17 @@ module.exports = {
         .setFooter({text : `${member.guild.name} Server`, iconURL : member.guild.iconURL()})
         member.send({embeds : [welcomeDMEmbed]})
     
+        // For log
+        const logChannel = client.channels.cache.get(config.channels.log.welcome)
+        if(logChannel){
+            const logEmbed = new MessageEmbed()
+            .setColor(config.colors.main)
+            .setAuthor({name : "Member Add Log"})
+            .setDescription(`**User** <@${member.user.id}> [${member.user.tag}] **joined to server**`)
+            .setThumbnail(member.user.displayAvatarURL())
+            .setTimestamp()
+            logChannel.send({embeds : [logEmbed]})
+        }
+
     }
 }
