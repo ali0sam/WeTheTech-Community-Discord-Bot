@@ -21,5 +21,29 @@ module.exports = {
         findChannel.send({embeds : [annEmbed]})
 
         await interaction.reply({content : "Say successfully sent", ephemeral : true})
+    },
+
+    executeCommand(client, message){
+
+        message.delete()
+
+        const messageArry = message.content.split(" ")
+        const annEmbed = new MessageEmbed()
+        .setColor(config.colors.main)
+
+        if(messageArry[1]){
+            annEmbed.setDescription(message.content.replace(messageArry[0], ""))
+            message.channel.send({embeds : [annEmbed]})
+        }else{
+            annEmbed.setDescription(`**SYNTAX**: ${config.bot.prefix}say [TEXT]`)
+            message.channel.send({embeds : [annEmbed]}).then(msg => {
+                setTimeout(() => {
+                    if(msg){
+                        msg.delete().catch(() => {})
+                    }
+                }, 10000);
+            })
+        }
+
     }
 }
