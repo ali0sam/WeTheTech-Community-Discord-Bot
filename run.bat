@@ -1,4 +1,4 @@
 :top
-git pull origin master
+git pull origin main
 node index.js
 goto top
