@@ -26,7 +26,7 @@ module.exports = {
         member.send({embeds : [welcomeDMEmbed]})
     
         // For log
-        const logChannel = client.channels.cache.get(config.channels.log.welcome)
+        const logChannel = client.channels.cache.get(config.channels.logs.welcome)
         if(logChannel){
             const logEmbed = new MessageEmbed()
             .setColor(config.colors.main)
