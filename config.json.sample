@@ -1,0 +1,7 @@
+{
+    "bot":{
+        "token" : "BOT_TOKEN",
+        "prefix" : "BOT_PREFIX",
+        "developers" : ["BOT_DEVELOPERS_ID"]
+    }
+}
