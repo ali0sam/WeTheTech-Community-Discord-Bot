@@ -23,5 +23,31 @@ module.exports = {
         findChannel.send({embeds : [annEmbed], content : "@everyone"})
 
         await interaction.reply({content : "Announcement successfully sent", ephemeral : true})
+    },
+
+    executeCommand(client, message){
+
+        message.delete()
+
+        const messageArry = message.content.split(" ")
+        const annEmbed = new MessageEmbed()
+        .setColor(config.colors.main)
+        .setAuthor({name : "Announcement", iconURL : message.guild.iconURL()})
+        .setFooter({text : `Sent by ${message.author.username}`, iconURL : message.author.displayAvatarURL()})
+
+        if(messageArry[1]){
+            annEmbed.setDescription(message.content.replace(messageArry[0], ""))
+            message.channel.send({content : "@everyone", embeds : [annEmbed]})
+        }else{
+            annEmbed.setDescription(`**SYNTAX**: ${config.bot.prefix}ann [TEXT]`)
+            message.channel.send({embeds : [annEmbed]}).then(msg => {
+                setTimeout(() => {
+                    if(msg){
+                        msg.delete().catch(() => {})
+                    }
+                }, 10000);
+            })
+        }
+
     }
 }
