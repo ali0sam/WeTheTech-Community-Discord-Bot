@@ -22,6 +22,14 @@ const eventsDir = fs.readdirSync("./events").filter((file) => file.endsWith(".js
 client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
 
+const commands = []
+
+for (const commandFile of commandsDir){
+  const requireCommand = require(`./commands/${commandFile}`)
+  commands.push(requireCommand.data.toJSON())
+  client.commands.set(requireCommand.data.name, requireCommand)
+}
+
 // Add events from events directory to client.events and add listener to it
 for (const eventFile of eventsDir) {
   const requireEvent = require(`./events/${eventFile}`);
@@ -40,6 +48,8 @@ client.on("messageCreate", message => {
     client.destroy() // This line destroy bot and when bot destroyed, source rerun cause run.bat have unlimited loop
   }
 })
+
+module.exports.commands = commands;
 
 // Run bot using token in config.json file
 client.login(config.bot.token);
