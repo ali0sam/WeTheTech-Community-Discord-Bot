@@ -13,7 +13,8 @@
         "generalChat" : "GENERAL_CHAT_ID",
         "welcome" : "WELCOME_ID",
         "logs" : {
-            "welcomer" : "WELCOMER_ID"
+            "welcomer" : "WELCOMER_ID",
+            "message" : "MESSAGE_LOG_ID"
         }
     },
 
