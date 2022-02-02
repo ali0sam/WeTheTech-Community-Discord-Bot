@@ -11,7 +11,13 @@ module.exports = {
         if(!client.commands.has(cmd) || !client.commands.get(cmd).executeCommand) return;
 
         const grabbedCommand = client.commands.get(cmd)
-        if(!grabbedCommand.permissions && !grabbedCommand.private) grabbedCommand.executeCommand(client, message);
+        if(!grabbedCommand.permissions && !grabbedCommand.private) {
+            try {
+                grabbedCommand.executeCommand(client, message);
+            } catch (error) {
+                message.channel.send("This command have problem... Please contact to developers")
+            }
+        }
 
     }
 }
