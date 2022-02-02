@@ -27,15 +27,14 @@ module.exports = {
     
         // For log
         const logChannel = client.channels.cache.get(config.channels.logs.welcome)
-        if(logChannel){
-            const logEmbed = new MessageEmbed()
-            .setColor(config.colors.main)
-            .setAuthor({name : "Member Add Log"})
-            .setDescription(`**User** <@${member.user.id}> [${member.user.tag}] **joined to server**`)
-            .setThumbnail(member.user.displayAvatarURL())
-            .setTimestamp()
-            logChannel.send({embeds : [logEmbed]})
-        }
+        const logEmbed = new MessageEmbed()
+        .setColor(config.colors.main)
+        .setAuthor({name : "Member Add Log"})
+        .setDescription(`**User** <@${member.user.id}> [${member.user.tag}] **joined to server**`)
+        .setThumbnail(member.user.displayAvatarURL())
+        .setTimestamp()
+        
+        if(logChannel) logChannel.send({embeds : [logEmbed]})
 
     }
 }
