@@ -15,7 +15,12 @@ module.exports = {
             try {
                 grabbedCommand.executeCommand(client, message);
             } catch (error) {
-                message.channel.send("This command have problem... Please contact to developers")
+                const errEmbed = new Discord.MessageEmbed()
+                .setColor(config.colors.main)
+                .setAuthor({name : "New error found"})
+                .setFooter({text : `${message.guild.name} Server`})
+                .setDescription(`This command have problem... Please contact to developers`)
+                message.channel.send({embeds : [errEmbed]})
             }
         }
 
