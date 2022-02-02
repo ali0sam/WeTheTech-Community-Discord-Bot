@@ -4,7 +4,7 @@ const config = require("../config.json")
 module.exports = {
     name : "messageCreate",
     description : "Handle when a user sent message",
-    execute(client, message){
+    async execute(client, message){
         const messageArry = message.content.split(" ")
         const cmd = messageArry[0].replace(config.bot.prefix, "")
 
@@ -19,5 +19,9 @@ module.exports = {
             }
         }
 
+
+        if(message.channel.id == config.channels.introduction && !message.author.bot){
+            await message.react(":white_check_mark:")
+        }
     }
 }
