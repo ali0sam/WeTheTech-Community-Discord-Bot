@@ -10,8 +10,7 @@ module.exports = {
 
         if(!client.commands.has(cmd) || !client.commands.get(cmd).executeCommand) return;
 
-        const grabbedCommand = client.commands.get(cmd)
-        if(!grabbedCommand.permissions && !grabbedCommand.private) {
+        function executeCommand() {
             try {
                 grabbedCommand.executeCommand(client, message);
             } catch (error) {
@@ -24,6 +23,22 @@ module.exports = {
             }
         }
 
+        const grabbedCommand = client.commands.get(cmd)
+
+        if(grabbedCommand.permissions){ // Command have a permission[s]
+            if(typeof grabbedCommand.permissions == "object"){ // If command have multi permission
+                for (const permission of grabbedCommand.permissions){
+                    if(message.member.permissions.has( Discord.Permissions.FLAGS[permission] )) return grabbedCommand();
+                }
+            }else{ // If command have one permission
+                if(message.member.permissions.has( Discord.Permissions.FLAGS[grabbedCommand.permission] )) return grabbedCommand();
+            }
+            return false
+        }
+
+        if(!grabbedCommand.permissions && !grabbedCommand.private) {
+            executeCommand()
+        }
 
         if(message.channel.id == config.channels.introduction && !message.author.bot){
             await message.react(":white_check_mark:")
