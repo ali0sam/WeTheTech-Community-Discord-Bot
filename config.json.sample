@@ -15,7 +15,8 @@
         "logs" : {
             "welcomer" : "WELCOMER_ID",
             "message" : "MESSAGE_LOG_ID",
-            "leave" : "LEAVE_LOG_ID"
+            "leave" : "LEAVE_LOG_ID",
+            "channel" : "CHANNEL_LOG_ADDED"
         }
     },
 
