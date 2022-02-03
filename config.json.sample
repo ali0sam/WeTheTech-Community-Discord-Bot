@@ -14,7 +14,8 @@
         "welcome" : "WELCOME_ID",
         "logs" : {
             "welcomer" : "WELCOMER_ID",
-            "message" : "MESSAGE_LOG_ID"
+            "message" : "MESSAGE_LOG_ID",
+            "leave" : "LEAVE_LOG_ID"
         }
     },
 
