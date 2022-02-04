@@ -4,7 +4,7 @@ const config = require("../config.json")
 module.exports = {
     name : "channelDelete",
     description : "Handle when a channel deleted",
-    execute(client, channel){
+    async execute(client, channel){
         const findChannel = client.channels.cache.get(config.channels.logs.channel)
         if(!findChannel) return 
 

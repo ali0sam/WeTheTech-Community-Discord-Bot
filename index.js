@@ -21,6 +21,7 @@ const eventsDir = fs.readdirSync("./events").filter((file) => file.endsWith(".js
 // For register and storing commands and events
 client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
+client.slashCommands = new Discord.Collection();
 
 const commands = []
 

@@ -4,6 +4,8 @@ const {MessageEmbed} = require("discord.js")
 const config = require("../config.json")
 
 module.exports = {
+    name : "ann",
+
     data : new SlashCommandBuilder()
         .setName("ann")
         .setDescription("Announce any texts")

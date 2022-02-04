@@ -4,6 +4,8 @@ const {MessageEmbed} = require("discord.js")
 const config = require("../config.json")
 
 module.exports = {
+    name : "say",
+
     data : new SlashCommandBuilder()
         .setName("say")
         .setDescription("Echo any texts")
