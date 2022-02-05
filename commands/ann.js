@@ -5,6 +5,7 @@ const config = require("../config.json")
 
 module.exports = {
     name : "ann",
+    permissions : ["ADMINISTRATOR"],
 
     data : new SlashCommandBuilder()
         .setName("ann")
