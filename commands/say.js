@@ -26,7 +26,7 @@ module.exports = {
         await interaction.reply({content : "Say successfully sent", ephemeral : true})
     },
 
-    executeCommand(client, message){
+   async executeCommand(client, message){
         let guildData = await client.data.getGuildDB(message.member.guild.id);
         message.delete()
 
