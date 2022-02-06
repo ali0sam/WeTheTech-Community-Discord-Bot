@@ -27,7 +27,7 @@ module.exports = {
     },
 
     executeCommand(client, message){
-
+        let guildData = await client.data.getGuildDB(message.member.guild.id);
         message.delete()
 
         const messageArry = message.content.split(" ")
@@ -38,7 +38,7 @@ module.exports = {
             annEmbed.setDescription(message.content.replace(messageArry[0], ""))
             message.channel.send({embeds : [annEmbed]})
         }else{
-            annEmbed.setDescription(`**SYNTAX**: ${config.bot.prefix}say [TEXT]`)
+            annEmbed.setDescription(`**SYNTAX**: ${guildData.prefix}say [TEXT]`)
             message.channel.send({embeds : [annEmbed]}).then(msg => {
                 setTimeout(() => {
                     if(msg){

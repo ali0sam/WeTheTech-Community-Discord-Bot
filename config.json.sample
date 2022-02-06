@@ -5,6 +5,10 @@
         "developers" : ["BOT_DEVELOPERS_ID"]
     },
 
+    "database":{
+        "SRV" : ""
+    },
+
     "guilds":{
         "main" : "MAIN_GUILD_ID"
     },

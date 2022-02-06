@@ -5,8 +5,10 @@ module.exports = {
     name : "messageCreate",
     description : "Handle when a user sent message",
     async execute(client, message){
+        let guildData = await client.data.getGuildDB(message.member.guild.id);
+
         const messageArry = message.content.split(" ")
-        const cmd = messageArry[0].replace(config.bot.prefix, "")
+        const cmd = messageArry[0].replace(guildData.prefix, "")
 
         if(!client.commands.has(cmd) || !client.commands.get(cmd).executeCommand) return;
 
