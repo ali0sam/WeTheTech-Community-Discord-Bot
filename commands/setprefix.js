@@ -9,24 +9,19 @@ module.exports = {
 
     data: new SlashCommandBuilder()
         .setName("setprefix")
-        .setDescription("set prefix for bot")
+        .setDescription("Update prefix for bot")
         .addStringOption(option =>
-            option.setName('input')
-                .setDescription('enter your new prefix')
+            option.setName('New prefix')
+                .setDescription('Enter your new prefix')
                 .setRequired(true)),
 
     async execute(client, interaction) {
 
-        const findChannel = client.channels.cache.get(interaction.channel.id)
-        const cmdEmbed = new MessageEmbed()
-            .setColor(config.colors.main)
-            .setDescription(interaction.options.getString("input"))
-        findChannel.send({ embeds: [cmdEmbed] })
         let guildData = await client.data.getGuildDB(interaction.guild.id);
         guildData.prefix = interaction.options.getString("input");
         guildData.save().catch(err => console.log(err))
 
-        await interaction.reply({ content: "prefix saved.", ephemeral: true })
+        await interaction.reply({ content: `Prefix changed to ${guildData.prefix}`, ephemeral: true })
     },
 
     async executeCommand(client, message) {
@@ -36,15 +31,21 @@ module.exports = {
         const messageArry = message.content.split(" ")
         const cmdEmbed = new MessageEmbed()
             .setColor(config.colors.main)
+            .setFooter({text : `${message.guild.name} Server`, iconURL : message.guild.iconURL({dynamic : true})})
+            .setAuthor({name : "Update Prefix"})
 
         if (messageArry[1]) {
-            cmdEmbed.setDescription(message.content.replace(messageArry[0], "new prefix is: "))
+            cmdEmbed.setDescription(`New prefix is ${messageArry[1]}`)
 
             // save new prefix
             guildData.prefix = messageArry[1];
             guildData.save().then(() => {
                 message.channel.send({ embeds: [cmdEmbed] })
-            }).catch(err => console.log(err))
+            }).catch(err => {
+                console.log(err)
+                cmdEmbed.setDescription(`Error for saving new prefix. Please contact to bot developers`)
+                message.channel.send({embeds : [cmdEmbed]})
+            })
 
         } else {
             cmdEmbed.setDescription(`**SYNTAX**: ${guildData.prefix}setprefix [PREFIX]`)
