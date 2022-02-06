@@ -11,7 +11,7 @@ module.exports = {
         .setName("setprefix")
         .setDescription("Update prefix for bot")
         .addStringOption(option =>
-            option.setName('New prefix')
+            option.setName('prefix')
                 .setDescription('Enter your new prefix')
                 .setRequired(true)),
 
