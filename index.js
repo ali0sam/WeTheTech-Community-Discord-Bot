@@ -44,8 +44,25 @@ const commands = []
 
 for (const commandFile of commandsDir) {
   const requireCommand = require(`./commands/${commandFile}`)
-  commands.push(requireCommand.data.toJSON())
-  client.commands.set(requireCommand.data.name, requireCommand)
+
+  if(requireCommand.data){
+    if(!requireCommand.everyoneCanUse){
+      requireCommand.data.defaultPermission = false
+
+      // if(requireCommand.userPermissions && requireCommand.userPermissions.length > 0){ 
+      //   const permissions = []
+
+      //   requireCommand.userPermissions.forEach(userPermission => {
+      //     permissions.push({id : userPermission, type : "USER", permission : true})
+      //   })
+
+      //   requireCommand.data.permissions = permissions
+      // }
+    }
+
+    commands.push(requireCommand.data.toJSON());
+  }
+  client.commands.set(requireCommand.name, requireCommand)
 }
 
 // Add events from events directory to client.events and add listener to it
