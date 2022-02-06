@@ -30,16 +30,16 @@ module.exports = {
         if(grabbedCommand.permissions){ // Command have a permission[s]
             if(typeof grabbedCommand.permissions == "object"){ // If command have multi permission
                 for (const permission of grabbedCommand.permissions){
-                    if(message.member.permissions.has( Discord.Permissions.FLAGS[permission] )) return grabbedCommand.executeCommand();
+                    if(message.member.permissions.has( Discord.Permissions.FLAGS[permission] )) return grabbedCommand.executeCommand(client, message);
                 }
             }else{ // If command have one permission
-                if(message.member.permissions.has( Discord.Permissions.FLAGS[grabbedCommand.permission] )) return grabbedCommand.executeCommand();
+                if(message.member.permissions.has( Discord.Permissions.FLAGS[grabbedCommand.permission] )) return grabbedCommand.executeCommand(client, message);
             }
             return false
         }
 
         if(!grabbedCommand.permissions && !grabbedCommand.private) {
-            grabbedCommand.executeCommand()
+            grabbedCommand.executeCommand(client, message)
         }
 
         if(message.channel.id == config.channels.introduction && !message.author.bot){
