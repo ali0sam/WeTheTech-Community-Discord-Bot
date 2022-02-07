@@ -21,6 +21,7 @@ module.exports = {
             .addChoice("Member Left Log", "guildMemberRemove")
             .addChoice("Message Delete Log", "messageDelete")
             .addChoice("Message Update Log", "messageUpdate")
+            .addChoice("About Channel", "about")
         )
 
         .addChannelOption(option => 
@@ -30,8 +31,8 @@ module.exports = {
         ),
 
     async execute(client, interaction) {
-        const event = await interaction.options.getChannel("event")
-        let channel = await interaction.options.getString("channel").id
+        const event = await interaction.options.getString("event")
+        let channel = await interaction.options.getChannel("channel").id
 
         const embed = new MessageEmbed()
         .setColor(config.colors.main)
