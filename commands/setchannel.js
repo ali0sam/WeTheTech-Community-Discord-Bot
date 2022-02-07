@@ -23,15 +23,15 @@ module.exports = {
             .addChoice("Message Update Log", "messageUpdate")
         )
 
-        .addStringOption(option => 
+        .addChannelOption(option => 
             option.setName("channel")
-            .setDescription("Enter channel id or channel name")
+            .setDescription("Mention channel you want to set")
             .setRequired(true)
         ),
 
     async execute(client, interaction) {
-        const event = await interaction.options.getString("event")
-        let channel = await interaction.options.getString("channel")
+        const event = await interaction.options.getChannel("event")
+        let channel = await interaction.options.getString("channel").id
 
         const embed = new MessageEmbed()
         .setColor(config.colors.main)
