@@ -4,18 +4,21 @@ const {MessageEmbed} = require("discord.js")
 module.exports = {
     name : "guildMemberAdd",
     description : "Handle when a member joined to server",
-    execute(client, member){
+    async execute(client, member){
 
-        const welcomeChannel = client.channels.cache.get(config.channels.welcome)
-        if(welcomeChannel){
-            const welcomeEmbed = new MessageEmbed()
-            .setColor(config.embeds.color)
-            .setThumbnail(member.user.displayAvatarURL({dynamic : true, size : 1024}))
-            .setAuthor({name : `Welcome ${member.user.username}`})
-            .setDescription(`Hey ${member.user.username} ! Khosh oomadi be server ${member.guild.name}.`)
-            .setFooter({text : `${member.guild.name} Server`, iconURL : member.guild.iconURL()})
-            welcomeChannel.send({embeds : [welcomeEmbed]})
-        }
+        const welcomerChannel = client.data.channel("welcomer")
+        if(welcomerChannel && welcomeChannel.channelId){
+            const welcomeChannel = client.channels.cache.get(welcomeChannel.channelId)
+            if(welcomeChannel){
+                const welcomeEmbed = new MessageEmbed()
+                .setColor(config.embeds.color)
+                .setThumbnail(member.user.displayAvatarURL({dynamic : true, size : 1024}))
+                .setAuthor({name : `Welcome ${member.user.username}`})
+                .setDescription(`Hey ${member.user.username} ! Khosh oomadi be server ${member.guild.name}.`)
+                .setFooter({text : `${member.guild.name} Server`, iconURL : member.guild.iconURL()})
+                welcomeChannel.send({embeds : [welcomeEmbed]})
+            }
+        }  
 
         const welcomeDMEmbed = new MessageEmbed()
         .setColor(config.embeds.color)
@@ -24,17 +27,21 @@ module.exports = {
         .setThumbnail(member.guild.iconURL({dynamic : true, size : 1024}))
         .setFooter({text : `${member.guild.name} Server`, iconURL : member.guild.iconURL()})
         member.send({embeds : [welcomeDMEmbed]})
-    
-        // For log
-        const logChannel = client.channels.cache.get(config.channels.logs.welcome)
-        const logEmbed = new MessageEmbed()
-        .setColor(config.colors.main)
-        .setAuthor({name : "Member Add Log"})
-        .setDescription(`**User** <@${member.user.id}> [${member.user.tag}] **joined to server**`)
-        .setThumbnail(member.user.displayAvatarURL())
-        .setTimestamp()
         
-        if(logChannel) logChannel.send({embeds : [logEmbed]})
+        // For log
+        const logChannelId = await client.data.channel(this.name)
+        if(logChannel && logChannelId.channelId){
+            const logChannel = client.channels.cache.get(config.channels.logs.welcome)
+            const logEmbed = new MessageEmbed()
+            .setColor(config.colors.main)
+            .setAuthor({name : "Member Add Log"})
+            .setDescription(`**User** <@${member.user.id}> [${member.user.tag}] **joined to server**`)
+            .setThumbnail(member.user.displayAvatarURL())
+            .setTimestamp()
+            
+            if(logChannel) logChannel.send({embeds : [logEmbed]})
+        }
+
 
     }
 }

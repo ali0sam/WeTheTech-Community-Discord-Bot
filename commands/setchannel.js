@@ -14,12 +14,13 @@ module.exports = {
             option.setName("event")
             .setDescription("Enter event name")
             .setRequired(true)
-            .addChoice("Channel Create", "channelCreate")
-            .addChoice("Channel Delete", "channelDelete")
-            .addChoice("Member Add", "guildMemberAdd")
-            .addChoice("Member Left", "guildMemberRemove")
-            .addChoice("Message Delete", "messageDelete")
-            .addChoice("Message Update", "messageUpdate")
+            .addChoice("Channel Create Log", "channelCreate")
+            .addChoice("Channel Delete Log", "channelDelete")
+            .addChoice("Member Add Log", "guildMemberAdd")
+            .addChoice("Member Add", "welcomer")
+            .addChoice("Member Left Log", "guildMemberRemove")
+            .addChoice("Message Delete Log", "messageDelete")
+            .addChoice("Message Update Log", "messageUpdate")
         )
 
         .addStringOption(option => 
@@ -42,7 +43,7 @@ module.exports = {
             return await interaction.reply({embeds : [embed], ephemeral : true})
         }
 
-        let logChannel = await client.data.logChannel(event)
+        let logChannel = await client.data.channel(event)
         if(logChannel) {
             const findChannel = interaction.guild.channels.cache.get(channel)
             if(findChannel){

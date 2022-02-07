@@ -5,7 +5,7 @@ module.exports = {
     name : "channelCreate",
     description : "Handle when a channel created",
     async execute(client, channel){
-        const logChannelId = await client.data.logChannel(this.name)
+        const logChannelId = await client.data.channel(this.name)
         if(logChannelId && logChannelId.channelId){
 
           const findChannel = client.channels.cache.get(logChannelId.channelId)

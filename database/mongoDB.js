@@ -19,8 +19,8 @@ module.exports.getGuildDB = async function (guildID) {
   }
 }
 
-module.exports.logChannel = async function (event) {
-  
+module.exports.channel = async function (event) {
+
   let channelDB = await ChannelDB.findOne({
     event: event
   })
