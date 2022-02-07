@@ -5,6 +5,12 @@ module.exports = {
     name : "messageCreate",
     description : "Handle when a user sent message",
     async execute(client, message){
+
+        const aboutChanel = await client.data.channel("about")
+        if(message.channel.id == aboutChanel){
+            await message.react("✅")
+        }
+
         let guildData = await client.data.getGuildDB(message.member.guild.id);
 
         const messageArry = message.content.split(" ")
