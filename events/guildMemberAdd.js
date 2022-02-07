@@ -7,7 +7,7 @@ module.exports = {
     async execute(client, member){
 
         const welcomerChannel = client.data.channel("welcomer")
-        if(welcomerChannel && welcomeChannel.channelId){
+        if(welcomerChannel && welcomerChannel.channelId){
             const welcomeChannel = client.channels.cache.get(welcomeChannel.channelId)
             if(welcomeChannel){
                 const welcomeEmbed = new MessageEmbed()
@@ -30,7 +30,7 @@ module.exports = {
         
         // For log
         const logChannelId = await client.data.channel(this.name)
-        if(logChannel && logChannelId.channelId){
+        if(logChannelId && logChannelId.channelId){
             const logChannel = client.channels.cache.get(config.channels.logs.welcome)
             const logEmbed = new MessageEmbed()
             .setColor(config.colors.main)
