@@ -1,5 +1,6 @@
 const GuildsDB = require("./schema/Guild.js");
 const ChannelDB = require("./schema/Channel")
+const AboutDB = require("./schema/About")
 
 
 module.exports.getGuildDB = async function (guildID) {
@@ -33,5 +34,22 @@ module.exports.channel = async function (event) {
     })
     await channelDB.save().catch(err => console.log(err))
     return channelDB
+  }
+}
+
+module.exports.about = async function (userId){
+
+  let aboutDB = await AboutDB.findOne({
+    user : userId
+  })
+
+  if(aboutDB){
+    return aboutDB
+  }else{
+    aboutDB = new AboutDB({
+      user : userId
+    })
+    await aboutDB.save().catch(err => console.log(err))
+    return aboutDB
   }
 }
