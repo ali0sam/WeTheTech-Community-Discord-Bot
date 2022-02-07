@@ -21,7 +21,16 @@ module.exports = {
         let aboutDB = await client.data.about(interaction.options.getMentionable("user").id);
 
         if(aboutDB && aboutDB.text){
-            await interaction.reply({ content: `**About message for ${interaction.options.getMentionable("user")}**\n\n${aboutDB.text}`, ephemeral: true })
+
+
+            if(aboutDB.text.length <= 1900){
+                await interaction.reply({ content: `**About message for ${interaction.options.getMentionable("user")}**\n\n${aboutDB.text}`, ephemeral: true })
+            }else{
+                const attachment = new Discord.MessageAttachment(Buffer.from(aboutDB.text, 'utf-8'), `about-${interaction.option.getMentionable("user").username}.txt`);
+                await interaction.reply({files : [{attachment}], ephemeral: true});
+            }
+
+
         }else{
             const errEmbed = new MessageEmbed()
                 .setColor(config.colors.main)
