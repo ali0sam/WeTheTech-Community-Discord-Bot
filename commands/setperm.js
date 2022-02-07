@@ -4,6 +4,7 @@ const config = require("../config.json")
 module.exports = {
     name : "setperm",
     permissions : ['ADMINISTRATOR'],
+    everyoneCanUse = false,
 
     async executeCommand(client, message){
         const messageArry = message.content.split(" ")

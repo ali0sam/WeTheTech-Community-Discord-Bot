@@ -6,6 +6,7 @@ const config = require("../config.json")
 module.exports = {
     name : "setprefix",
     permissions : ["ADMINISTRATOR"],
+    everyoneCanUse = false,
 
     data: new SlashCommandBuilder()
         .setName("setprefix")

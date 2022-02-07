@@ -4,6 +4,7 @@ const { MessageEmbed } = require("discord.js")
 module.exports = {
     name : "setchannel",
     permissions : ["ADMINISTRATOR"],
+    everyoneCanUse = false,
 
     data : new SlashCommandBuilder()
         .setName("setchannel")

@@ -46,20 +46,8 @@ for (const commandFile of commandsDir) {
   const requireCommand = require(`./commands/${commandFile}`)
 
   if(requireCommand.data){
-    if(!requireCommand.everyoneCanUse){
-      requireCommand.data.defaultPermission = false
-
-      // if(requireCommand.userPermissions && requireCommand.userPermissions.length > 0){ 
-      //   const permissions = []
-
-      //   requireCommand.userPermissions.forEach(userPermission => {
-      //     permissions.push({id : userPermission, type : "USER", permission : true})
-      //   })
-
-      //   requireCommand.data.permissions = permissions
-      // }
-    }
-
+    if(!requireCommand.everyoneCanUse)requireCommand.data.defaultPermission = false
+    
     commands.push(requireCommand.data.toJSON());
   }
   client.commands.set(requireCommand.name, requireCommand)
