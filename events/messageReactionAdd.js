@@ -6,6 +6,7 @@ module.exports = {
     description : "Handle when a reaction added to a message",
 
     async execute(client, react, user){
+        if(user.bot) return;
         const aboutChannel = await client.data.channel("about")
         const reactChannel = react.message.channelId
         if(reactChannel == aboutChannel.channelId){
@@ -15,8 +16,9 @@ module.exports = {
                 if(!findUser) return;
 
                 const isUserHaveAdministrator = findUser.permissions.has( Discord.Permissions.FLAGS.ADMINISTRATOR )
-                if(!isUserHaveAdministrator) return await react.delete();
+                if(!isUserHaveAdministrator) return;
 
+                await react.delete()
                 const aboutDB = await client.data.about(react.message.author.id)
                 aboutDB.text = react.message.content
                 aboutDB.save().then(() => {

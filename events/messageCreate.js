@@ -7,7 +7,8 @@ module.exports = {
     async execute(client, message){
 
         const aboutChanel = await client.data.channel("about")
-        if(message.channel.id == aboutChanel){
+        if(message.channel.id == aboutChanel.channelId){
+            if(message.author.bot) return;
             await message.react("✅")
         }
 
