@@ -1,3 +1,4 @@
+const { SlashCommandBuilder } = require("@discordjs/builders")
 const { MessageEmbed } = require("discord.js")
 const config = require("../config.json")
 
@@ -5,6 +6,72 @@ module.exports = {
     name : "setperm",
     permissions : ['ADMINISTRATOR'],
     everyoneCanUse : false,
+
+    data : new SlashCommandBuilder()
+    .setName("setperm")
+    .setDescription(`Give and remove access to commands for a user`)
+    .addStringOption(option => option
+        .setName("user")
+        .setDescription("Enter user id")
+        .setRequired(true)
+    ).addStringOption(option => option
+        .setName("command")
+        .setDescription("Enter command name")
+        .setRequired(true)
+    ).addStringOption(option => option
+        .setName("action")
+        .setDescription("Enter action")
+        .setRequired(true)
+        .addChoice("Give Access", "give")
+        .addChoice("Remove Access", "remove")
+    ),
+
+    async execute(client, interaction) {
+        const userId = await interaction.options.getString("user")
+        const targetCommand = await interaction.options.getString("command")
+        const action = await interaction.options.getString("action")
+
+        const embed = new MessageEmbed()
+        .setColor(config.colors.main)
+        .setFooter({text : `${interaction.guild.name} Server`, iconURL : interaction.guild.iconURL()})
+        .setAuthor({name : "Logs", iconURL : interaction.guild.iconURL()})
+
+        const findUser = interaction.guild.members.cache.get(userId)
+        if(findUser){
+
+            await interaction.guild.commands.fetch().then(async commands => { // Get all commands in guild
+                const foundCmd = commands.find(cmd => cmd.name == targetCommand) // Get target command
+    
+                if(!foundCmd){ // Check if command exist
+                    embed.setDescription(`Can't find this command`)
+                    return interaction.reply({embeds : [embed], ephemeral : true})
+                }
+    
+                if (!client.application?.owner) await client.application?.fetch(); // I dont know about this line :))))))
+        
+                const command = await interaction.guild?.commands.fetch(foundCmd.id); // Get target command
+        
+                const permissions = [ // Needed permission
+                    {
+                        id: userId,
+                        type: 'USER',
+                        permission: true,
+                    },
+                ];
+    
+                if(action == "remove") permissions[0].permission = false // If user want to remove permission, set permission to false
+        
+                await command.permissions.add({ permissions }).then(async () => { // Update permission
+                    embed.setDescription(`Successfully updated command **${targetCommand}** for user <@${userId}> [Action : ${action}]`)
+                    await interaction.reply({embeds : [embed], ephemeral : true})
+                });
+            })
+
+        }else{
+            embed.setDescription(`User not found`)
+            return await interaction.reply({embeds : [embed], ephemeral : true})
+        }
+    },
 
     async executeCommand(client, message){
         const messageArry = message.content.split(" ")
