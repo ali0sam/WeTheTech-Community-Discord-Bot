@@ -13,10 +13,12 @@ module.exports = {
             option.setName("name")
             .setDescription("Enter name for channel")
             .setRequired(true)
-            .addChoice("channel create", "channelCreate")
-            .addChoice("channel delete", "channelDelete")
-            .addChoice("member add", "guildMemberAdd")
-            .addChoice("member left", "guildMemberRemove")
+            .addChoice("Channel Create", "channelCreate")
+            .addChoice("Channel Delete", "channelDelete")
+            .addChoice("Member Add", "guildMemberAdd")
+            .addChoice("Member Left", "guildMemberRemove")
+            .addChoice("Message Delete", "messageDelete")
+            .addChoice("Message Update", "messageUpdate")
         )
 
         .addStringOption(option => 
@@ -26,7 +28,7 @@ module.exports = {
         ),
 
     async execute(client, interaction) {
-        await interaction.reply("Done!")
+        console.log(interaction.getString("name"))
     },
 
     async executeCommand(client, message) {
