@@ -4,10 +4,13 @@ const config = require("../config.json")
 module.exports = {
     name : "messageDelete",
     description : "Handle when a message deleted",
-    execute(client, message){
+    async execute(client, message){
         if(!message.content || message.content == "") return;
 
-        const logChannel = client.channels.cache.get(config.channels.logs.message)
+        const logChannelId = await client.data.channel(this.name)
+        if(!logChannelId.channelId) return;
+        const logChannel = client.channels.cache.get(logChannelId.channelId)
+
         const embed = new MessageEmbed()
         .setColor(config.colors.main)
         .setAuthor({name : "Log | Message Deleted", iconURL : message.guild.iconURL()})

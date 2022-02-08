@@ -6,7 +6,7 @@ module.exports = {
     description : "Handle when a member joined to server",
     async execute(client, member){
 
-        const welcomerChannel = client.data.channel("welcomer")
+        const welcomerChannel = await client.data.channel("welcomer")
         if(welcomerChannel && welcomerChannel.channelId){
             const welcomeChannel = client.channels.cache.get(welcomeChannel.channelId)
             if(welcomeChannel){
