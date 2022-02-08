@@ -14,7 +14,7 @@ module.exports = {
             const welcomeChannel = client.channels.cache.get(welcomeChannel.channelId) // Find channel
 
             const welcomeEmbed = new MessageEmbed()
-                .setColor(config.embeds.color)
+                .setColor(config.colors.main)
                 .setThumbnail(member.user.displayAvatarURL({dynamic : true, size : 1024}))
                 .setAuthor({name : `Welcome ${member.user.username}`})
                 .setDescription(`Hey ${member.user.username} ! Khosh oomadi be server ${member.guild.name}.`)
@@ -28,7 +28,7 @@ module.exports = {
 
         // ---------------- DM Welcomer ---------------
         const welcomeDMEmbed = new MessageEmbed()
-            .setColor(config.embeds.color)
+            .setColor(config.colors.main)
             .setAuthor({name : `خوش اومدی به ${member.guild.name}`, iconURL : member.user.displayAvatarURL({dynamic : true})})
             .setDescription(`سلام ${member.user.username}. خوش اومدی به سرور ${member.guild.name} !\n\nامیدوارم لحظات خوبی رو توی سرور داشته باشی\n\nبهت پیشنهاد میکنم به چت اصلی سرور سر بزنی <#${config.channels.generalChat}>`)
             .setThumbnail(member.guild.iconURL({dynamic : true, size : 1024}))
