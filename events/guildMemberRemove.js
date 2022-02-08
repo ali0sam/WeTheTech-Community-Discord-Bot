@@ -13,7 +13,7 @@ module.exports = {
             .setDescription(`User ${member.user} [${member.user.tag}] left from server`)
             .setFooter({text : `${member.guild.name} Server`})
         
-        const findChannelId = await client.data.channel(this.name.toLowerCase()) // Get channel id from database
+        const findChannelId = await client.data.channel(this.name) // Get channel id from database
         if(!findChannelId.channelId) return; // Check if channel id exist
 
         const findChannel = client.channels.cache.get(findChannelId.channelId) // Find channel

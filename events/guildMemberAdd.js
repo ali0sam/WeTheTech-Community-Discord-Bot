@@ -39,7 +39,7 @@ module.exports = {
 
 
         // ---------------- Log Welcomer ---------------
-        const logChannelId = await client.data.channel(this.name.toLowerCase()) // Get channel id from database
+        const logChannelId = await client.data.channel(this.name) // Get channel id from database
         if(!logChannelId || !logChannelId.channelId) return; // Check if channel id exist
 
         const logChannel = client.channels.cache.get(logChannelId.channelId) // Find channel

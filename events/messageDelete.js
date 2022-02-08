@@ -9,7 +9,7 @@ module.exports = {
 
         if(!message.content || message.content == "") return; // Check if message content exist (for filter embeds)
 
-        const logChannelId = await client.data.channel(this.name.toLowerCase()) // Get log channel id from database
+        const logChannelId = await client.data.channel(this.name) // Get log channel id from database
         if(!logChannelId.channelId) return; // Check if channel id exist
 
         const logChannel = client.channels.cache.get(logChannelId.channelId) // Find channel
