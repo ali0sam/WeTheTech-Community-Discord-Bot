@@ -49,6 +49,7 @@ module.exports = {
             })
 
         } else {
+            // if user dont enter new prefix
             cmdEmbed.setDescription(`**SYNTAX**: ${guildData.prefix}setprefix [PREFIX]`)
             message.channel.send({ embeds: [cmdEmbed] }).then(msg => {
                 setTimeout(() => {

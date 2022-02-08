@@ -42,6 +42,7 @@ module.exports = {
         }else{
             annEmbed.setDescription(`**SYNTAX**: ${config.bot.prefix}ann [TEXT]`)
             message.channel.send({embeds : [annEmbed]}).then(msg => {
+                // delete message after 10 seconds
                 setTimeout(() => {
                     if(msg){
                         msg.delete().catch(() => {})

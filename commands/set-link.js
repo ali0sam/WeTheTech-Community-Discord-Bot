@@ -45,6 +45,7 @@ module.exports = {
 
         const userData = await client.data.link(interaction.user.id)
 
+        // if user set a option then add it to userData and update the database
         if(twitter) userData.twitter = twitter
         if(github) userData.github = github
         if(instagram) userData.instagram = instagram

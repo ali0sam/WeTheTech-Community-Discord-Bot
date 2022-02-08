@@ -31,6 +31,7 @@ module.exports = {
 
 
         }else{
+            // if user has no about message
             const errEmbed = new MessageEmbed()
                 .setColor(config.colors.main)
                 .setAuthor({name : "About message"})
