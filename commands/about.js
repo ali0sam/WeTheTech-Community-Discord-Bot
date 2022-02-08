@@ -25,7 +25,7 @@ module.exports = {
 
             const userAboutEmbed = new MessageEmbed()
                 .setColor(config.colors.main)
-                .setFooter({name : `${userMentioned.username} | About`, iconURL : userMentioned.displayAvatarURL({dynamic : true})})
+                .setFooter({text : `${userMentioned.username} | About`, iconURL : userMentioned.displayAvatarURL({dynamic : true})})
                 .setDescription(aboutDB.text);
             await interaction.reply({embeds : [userAboutEmbed], ephemeral : true});
 
