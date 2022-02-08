@@ -22,7 +22,7 @@ module.exports = {
             const isUserHaveAdministrator = findUser.permissions.has( Discord.Permissions.FLAGS.ADMINISTRATOR ) // check if user have administrator permission
             if(!isUserHaveAdministrator) return;
 
-            await react.delete() // If user have administrator permission then delete reaction comes from user
+            await react.remove() // If user have administrator permission then delete reaction comes from user
 
             const aboutDB = await client.data.about(react.message.author.id) // get about data for user from database
             aboutDB.text = react.message.content // Update user's about message to new one
