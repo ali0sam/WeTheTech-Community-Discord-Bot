@@ -29,7 +29,7 @@ and you must have a discord account🤨
 
 4: copy the bot token and prefix, your id as a developer id, mongoDB SRV link, your server id, HEX color, and put it in the ``config.json.sample`` file and rename it to ``config.json``
 
-5: ```npm install``` , ```node index.js```
+5: ```npm install``` then ```node index.js```
 
 <br>
 
