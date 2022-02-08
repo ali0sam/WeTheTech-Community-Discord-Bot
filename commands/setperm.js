@@ -10,7 +10,7 @@ module.exports = {
     data : new SlashCommandBuilder()
     .setName("setperm")
     .setDescription(`Give and remove access to commands for a user`)
-    .addMentionableOption(option => option
+    .addUserOption(option => option
         .setName("user")
         .setDescription("Enter user id")
         .setRequired(true)
@@ -30,7 +30,7 @@ module.exports = {
     ),
 
     async execute(client, interaction) {
-        const userId = await interaction.options.getMentionable("user").id
+        const userId = await interaction.options.getUser("user").id
         const targetCommand = await interaction.options.getString("command")
         const action = await interaction.options.getString("action")
 

@@ -9,7 +9,7 @@ module.exports = {
     data : new SlashCommandBuilder()
         .setName("about")
         .setDescription("Get about message for other users")
-        .addMentionableOption(option =>
+        .addUserOption(option =>
             option
             .setName("user")
             .setDescription("User you want to have about message")
@@ -18,15 +18,15 @@ module.exports = {
 
     async execute(client, interaction){
         
-        let aboutDB = await client.data.about(interaction.options.getMentionable("user").id);
+        let aboutDB = await client.data.about(interaction.options.getUser("user").id);
 
         if(aboutDB && aboutDB.text){
 
 
             if(aboutDB.text.length <= 1900){
-                await interaction.reply({ content: `**About message for ${interaction.options.getMentionable("user")}**\n\n${aboutDB.text}`, ephemeral: true })
+                await interaction.reply({ content: `**About message for ${interaction.options.getUser("user")}**\n\n${aboutDB.text}`, ephemeral: true })
             }else{
-                const attachment = new Discord.MessageAttachment(Buffer.from(aboutDB.text, 'utf-8'), `about-${interaction.option.getMentionable("user").username}.txt`);
+                const attachment = new Discord.MessageAttachment(Buffer.from(aboutDB.text, 'utf-8'), `about-${interaction.option.getUser("user").username}.txt`);
                 await interaction.reply({files : [{attachment}], ephemeral: true});
             }
 
@@ -36,7 +36,7 @@ module.exports = {
                 .setColor(config.colors.main)
                 .setAuthor({name : "About message"})
                 .setFooter({text : `${interaction.guild.name} Server`, iconURL : interaction.guild.iconURL({dynamic : true})})
-                .setDescription(`**${interaction.options.getMentionable("user")}** has no about message`)
+                .setDescription(`**${interaction.options.getUser("user")}** has no about message`)
             await interaction.reply({embeds : [errEmbed], ephemeral: true})
         }
     }

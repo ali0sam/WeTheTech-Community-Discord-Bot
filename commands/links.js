@@ -10,21 +10,21 @@ module.exports = {
     data : new SlashCommandBuilder()
         .setName("links")
         .setDescription("See anyone's social media links")
-        .addMentionableOption(option => 
+        .addUserOption(option => 
             option.setName("user")
             .setDescription("Mention user you want to see link")
             .setRequired(true)
         ),
 
     async execute(client, interaction) {
-        const user = await interaction.options.getMentionable("user")
+        const user = await interaction.options.getUser("user")
         const userData = await client.data.link(user.id)
         const embed = new MessageEmbed()
             .setColor(config.colors.main)
             .setFooter({text : `${interaction.guild.name} Server`, iconURL : interaction.guild.iconURL()})
             .setAuthor({name : "User Links", iconURL : interaction.guild.iconURL()})
-            .setDescription(`**${user.user.username}**'s social media links`)
-            .setThumbnail(user.user.displayAvatarURL({dynamic : true, size : 1024}))
+            .setDescription(`**${user.username}**'s social media links`)
+            .setThumbnail(user.displayAvatarURL({dynamic : true, size : 1024}))
             .addField("Twitter", userData.twitter ? userData.twitter : "Not set")
             .addField("Github", userData.github ? userData.github : "Not set")
             .addField("Instagram", userData.instagram ? userData.instagram : "Not set")
