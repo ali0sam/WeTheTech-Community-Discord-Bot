@@ -12,7 +12,7 @@ module.exports = {
         if(!newMessage.content || newMessage.content == "") return; // Check if new message content exist (for filter embeds)
         if(oldMessage.content == newMessage.content) return; // Check if old message content and new message content is same (for filter embeds)
 
-        const logChannelId = await client.data.channel(this.name) // Get log channel id from database
+        const logChannelId = await client.data.channel(this.name.toLowerCase()) // Get log channel id from database
         if(!logChannelId.channelId) return; // Check if channel id exist
 
         const logChannel = client.channels.cache.get(logChannelId.channelId) // Get log channel

@@ -6,7 +6,7 @@ module.exports = {
     name : "channelDelete",
     description : "Handle when a channel deleted",
     async execute(client, channel){
-      const logChannelId = await client.data.channel(this.name) // Get channel id from database
+      const logChannelId = await client.data.channel(this.name.toLowerCase()) // Get channel id from database
       if(!logChannelId || !logChannelId.channelId) return; // Check if channel id exist
 
       const findChannel = client.channels.cache.get(logChannelId.channelId) // Find channel
