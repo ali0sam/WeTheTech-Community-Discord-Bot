@@ -6,8 +6,9 @@ module.exports = {
     description : "When bot is ready",
     async execute(client){
 
-        console.log(`${client.user.tag} is now ready to use`)
+        console.log(`Connected to bot ${client.user.tag}`)
 
+        // ------------ Register slash commands ------------
         const guild = client.guilds.cache.get(config.guilds.main)
         await guild.commands.set(index.commands)
 

@@ -21,12 +21,11 @@ client.data = require("./database/mongoDB.js")
 
 mongoose.connect(config.database.SRV).then(() => {
   console.log("Connected to database");
+
   // Run bot using token in config.json file
   client.login(config.bot.token);
-  console.log("Bot is running");
-}).catch(err => {
-  console.log(err);
-});
+
+}).catch(err => { console.log(err); });
 
 
 
