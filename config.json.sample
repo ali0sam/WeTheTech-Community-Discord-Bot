@@ -13,17 +13,6 @@
         "main" : "MAIN_GUILD_ID"
     },
 
-    "channels":{
-        "generalChat" : "GENERAL_CHAT_ID",
-        "welcome" : "WELCOME_ID",
-        "logs" : {
-            "welcomer" : "WELCOMER_ID",
-            "message" : "MESSAGE_LOG_ID",
-            "leave" : "LEAVE_LOG_ID",
-            "channel" : "CHANNEL_LOG_ID"
-        }
-    },
-
     "colors":{
         "main" : "HEX_COLOR"
     }
