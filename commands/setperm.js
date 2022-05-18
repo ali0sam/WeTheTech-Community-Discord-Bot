@@ -24,9 +24,14 @@ module.exports = {
         .setName("action")
         .setDescription("Enter action")
         .setRequired(true)
-        .addChoice("Give Access", "give")
-        .addChoice("Remove Access", "remove")
-
+        .addChoices({
+            name: 'Give Access', 
+            value: 'give'
+        })
+        .addChoices({
+            name: 'Remove Access', 
+            value: 'remove'
+        })
     ),
 
     async execute(client, interaction) {

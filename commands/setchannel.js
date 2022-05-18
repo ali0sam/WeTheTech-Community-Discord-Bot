@@ -14,14 +14,38 @@ module.exports = {
             option.setName("event")
             .setDescription("Enter event name")
             .setRequired(true)
-            .addChoice("Channel Create Log", "channelCreate")
-            .addChoice("Channel Delete Log", "channelDelete")
-            .addChoice("Member Add Log", "guildMemberAdd")
-            .addChoice("Member Add", "welcomer")
-            .addChoice("Member Left Log", "guildMemberRemove")
-            .addChoice("Message Delete Log", "messageDelete")
-            .addChoice("Message Update Log", "messageUpdate")
-            .addChoice("About Channel", "about")
+            .addChoices({
+                name: 'Channel Create Log', 
+                value: 'channelCreate'
+            })
+            .addChoices({
+                name: 'Channel Delete Log', 
+                value: 'channelDelete'
+            })
+            .addChoices({
+                name: 'Member Add Log', 
+                value: 'guildMemberAdd'
+            })
+            .addChoices({
+                name: 'Member Add', 
+                value: 'welcomer'
+            })
+            .addChoices({
+                name: 'Member Left Log', 
+                value: 'guildMemberRemove'
+            })
+            .addChoices({
+                name: 'Message Delete Log', 
+                value: 'messageDelete'
+            })
+            .addChoices({
+                name: 'Message Update Log', 
+                value: 'messageUpdate'
+            })
+            .addChoices({
+                name: 'About Channel', 
+                value: 'about'
+            })
         )
 
         .addChannelOption(option => 
